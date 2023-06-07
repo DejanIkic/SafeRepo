@@ -1,5 +1,16 @@
-package org.unibl.etf;public class Main {
+package main.java.org.unibl.etf;
+
+public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        printEq();
+        System.out.println("P");
+
+
+        printEq();
+
+    }
+
+    private static void printEq(){
+        System.out.println("==============================");
     }
 }
