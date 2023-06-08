@@ -1,0 +1,2 @@
+Ovo je neki probni fajl koji sluzi za testiranje funkcionalnosti.
+/usr/lib/jvm/java-17-openjdk/bin/java -javaagent:/usr/share/idea/lib/idea_rt.jar=45
