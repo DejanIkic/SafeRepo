@@ -24,14 +24,15 @@ public class Utils {
     public static final String REPO_PATH = "src" + File.separator +"repo" + File.separator;
     public static final String RESOURCES_PATH = "src" + File.separator +"resources" + File.separator;
     public static final String SIGNATURES_PATH = "src" + File.separator +"signatures" + File.separator;
-    public static final String DATABASE_PATH = RESOURCES_PATH +"database.txt";
+    public static final String DATABASE_PATH = REPO_PATH +"database.txt";
 
+    public static final File PROBNI_FAJL = new File( RESOURCES_PATH + File.separator + "probniFajl.txt" );
 
     public static PrivateKey CAPrivateKey;
     public static X509Certificate CACertificate;
 
     static {
-        String privateKeyFilePath = "src" + File.separator +"ca" + File.separator +"private" + File.separator +"private4096.key";
+        /*String privateKeyFilePath = "src" + File.separator +"ca" + File.separator +"private" + File.separator +"private4096.key";
 
         try {
             Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
@@ -51,11 +52,9 @@ public class Utils {
             System.out.println("Private key: " + privateKey);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
-    public static void main(String[] args) {
 
-    }
 
 }

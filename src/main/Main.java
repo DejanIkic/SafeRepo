@@ -1,9 +1,12 @@
 package main;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.DigestException;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
@@ -11,11 +14,13 @@ import java.security.cert.X509Certificate;
 import java.sql.PreparedStatement;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
     public static Scanner sc = new Scanner(System.in);
+    public static Random random = new Random();
     private static String username;
     private static String password;
 
@@ -35,7 +40,10 @@ public class Main {
         }*/
 
         //Cripto.getUserSertificate();
-        registracijaNaSistem();
+
+        //homePage();
+
+        Cripto.prikazFajlova("dejan");
     }
 
     private static void printEq() {
@@ -51,12 +59,22 @@ public class Main {
         while (whileCond) {
 
             System.out.println("Dobrodosli!\nPritisnite dugme [ r -registracija\b p -prijava ]");
-            input= sc.nextLine().charAt(0);
+            input = sc.nextLine().charAt(0);
             input = Character.toUpperCase(input);
             switch (input) {
                 case 'P': {
                     ////////////Prijava na sistem
-                    prijavaNaSistem();
+                    if (prijavaNaSistem()) {
+
+                        printEq();
+
+                        Cripto.prikazFajlova(username);
+                        dodajFajl();
+                        preuzmiFajl();
+
+                    } else {
+                        return;
+                    }
                     whileCond = false;
                     break;
                 }
@@ -74,77 +92,130 @@ public class Main {
 
     }
 
-    private static void prijavaNaSistem(){
+    private static boolean prijavaNaSistem() {
 
         printEq();
         boolean certTrue = true;
 
 
-        System.out.println("Unesite putanju do svog sertifikata { /ca/certs/username");
+        System.out.println("Unesite korisnicko ime: ");
+        username = sc.nextLine();
         ////////////////////////////////Provjera
-        System.out.println("provjera sertifikata == " + certTrue);
+        //System.out.println("Provjera: ");
+        Cripto.provjeriSertifikat(username + ".crt");
 
-        if (certTrue){
+
+        if (certTrue) {
             int i = 3;
-            while (true){
 
-                System.out.print("Unesite korisnicko ime: " );
-                username = sc.nextLine();
-                System.out.print("Unesite lozinku: " );
+            while (i != 0) {
+                System.out.print("Lorisnicko ime: " + username + "\n");
+                System.out.print("Unesite lozinku: ");
                 password = sc.nextLine();
                 /////////////////////////// provjera sifre i imena
-                boolean rezultatProvjere = true;
+                boolean rezultatProvjere = Cripto.provjeraLozinke(username, password);
 
-                if (rezultatProvjere){
-                    break;
-                } else i--;
-                if (i == 0) {
+                if (rezultatProvjere) { ///uspjesna prijava
+                    System.out.println("Uspjesna prijava ");
+                    return true;
+                } else {  ///neuspjesna prijava
+                    System.out.println(" Pogresni kredencijali, probajte ponovo, imate jos " + --i + " pokusaj(a)!\n");
+                }
+                if (i == 0) { ///suspenzija
                     /////////////////////// suspenduj sertifikat i ponudi reaktivaciju;
+                    System.out.println("Vas sertifikat je suspendovan! \nIzaberite opciju" +
+                            "\n[-o obnova sertifikata, -r registracija novog naloga]");
+//                    String input = sc.nextLine();
+                    String input = "o";
+
+                    switch (input.toUpperCase().charAt(0)) {
+                        case 'O': {
+
+                        }
+                        case 'R': {
+                            registracijaNaSistem();
+                        }
+                    }
+                    return false;
                 }
             }
         }
 
+        return certTrue;
     }
 
-    private static void registracijaNaSistem(){
-
+    private static void registracijaNaSistem() {
         /////////// unos imena
         printEq();
         File usersPath = new File(Utils.USERS_PATH);
         String[] usersList = usersPath.list();
         File newUser = null;
         boolean uslov = true;
-        do{
+        do {
 
             System.out.println("Unesite korisnicko ime: ");
             username = sc.nextLine();
 
-            if (Arrays.asList(usersList).contains(username)){
+            if (Arrays.asList(usersList).contains(username)) {
                 System.out.println("Korisnicko ime je zauzeto!");
             } else {
-                 newUser = new File(usersPath +File.separator+ username );
+                newUser = new File(usersPath + File.separator + username);
                 newUser.mkdir();
                 uslov = false;
-                //System.out.println("korisnik " + username + " je kreiran");
             }
         } while (uslov);
 
-
         /////////// unos lozinke
-
         System.out.println("Unesite lozinku: ");
         password = sc.nextLine();
         String hashLozinke = Cripto.hashBytes(password.getBytes(StandardCharsets.UTF_8));
+        try {
+            File file = new File(newUser, "password");
+            FileWriter fw = new FileWriter(file);
+            fw.write(hashLozinke);
+            fw.close();
+        } catch (IOException e) {
+        }
+
+        KeyPair klucevi = Cripto.generisiKljuceve(newUser);
+
+        Cripto.generisiSertifikat(username);
+
+    }
+
+    private static void preuzmiFajl(){
+        printEq();
+        System.out.println("Da li zelite da preuzmete neki fajl [y/n]");
+        String input = sc.nextLine();
+
+        switch (input.toUpperCase().charAt(0)){
+            case 'Y' :{
+                Cripto.prikazFajlova(username);
+
+            } case 'N':{
+            }
+        }
+
+    }
+
+    private static void dodajFajl(){
+        printEq();
+        System.out.println("Da li zelite da dodate neki fajl [y/n]");
+        String input = sc.nextLine();
 
 
-        KeyPair klucevi =  Cripto.generisiKljuceve(  newUser);
 
+        switch (input.toUpperCase().charAt(0)){
+            case 'Y' :{
+                System.out.println("Unesite putanju do fajla [apsolutna putanja]:  ");
+                String putanja = sc.nextLine();
+                //String putanja  = "/home/dejan/Desktop/mrs/SafeRepo/src/resources/test.txt";
+                File file = new File( putanja);
 
+                Cripto.dodajFajl(username, file);
 
-
-        /////////// izdavanje sertifikata
-       //Cripto.createUser("dejan1","dejan1","dejan1","dejan1");
-
-
+            } case 'N':{
+            }
+        }
     }
 }

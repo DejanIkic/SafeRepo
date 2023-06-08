@@ -5,13 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eba73811-a155-4888-b854-b0b3e79a4c6c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ca/private/private4096.key" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/private/private4096.key" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/certs/cert1.crt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/crlnumber" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/crlnumber" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/index.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/index.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/index.txt.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/index.txt.old" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/newcerts/01.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/private/private2048.key" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/reqs/req1.csr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/serial" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/serial" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/serial.old" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Cripto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Cripto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/poslovice.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/database.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/repo/database.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/dejan/proba.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,13 +43,6 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="workspaceImportEnabled" value="true" />
-      </MavenImportingSettings>
-    </option>
-  </component>
   <component name="ProjectId" id="2QnUa3Ub6NA9y388NYalpzQQQwp" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -51,22 +56,41 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/Dejan/Desktop/kripto projekat/SafeRepo/src/ca/scripts",
-    "project.structure.last.edited": "Modules",
+    "last_opened_file_path": "/home/dejan/Desktop/mrs/SafeRepo/src/resources",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/resources" />
+      <recent name="$PROJECT_DIR$/src/repo" />
       <recent name="C:\Users\Dejan\Desktop\kripto projekat\SafeRepo\src\ca\scripts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/repo" />
+      <recent name="$PROJECT_DIR$/src/ca/scripts" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Utils">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Cripto" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.Cripto" />
+      <module name="SafeRepo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="SafeRepo" />
@@ -108,8 +132,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Utils" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Cripto" />
+        <item itemvalue="Application.Utils" />
         <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
@@ -141,7 +166,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/Main.java</url>
-          <line>21</line>
+          <line>26</line>
           <properties class="main.Main" method="main">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -150,8 +175,33 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
-          <line>85</line>
-          <option name="timeStamp" value="2" />
+          <line>175</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
+          <line>98</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
+          <line>140</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
+          <line>141</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
+          <line>104</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
+          <line>138</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
