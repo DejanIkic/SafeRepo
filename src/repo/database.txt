@@ -1,2 +1,2 @@
-dejan,test.txt,10
-dejan,token.txt,4
+dejan,token.txt,3
+dejan,x,3

@@ -28,32 +28,6 @@ public class Utils {
 
     public static final File PROBNI_FAJL = new File( RESOURCES_PATH + File.separator + "probniFajl.txt" );
 
-    public static PrivateKey CAPrivateKey;
-    public static X509Certificate CACertificate;
-
-    static {
-        /*String privateKeyFilePath = "src" + File.separator +"ca" + File.separator +"private" + File.separator +"private4096.key";
-
-        try {
-            Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
-
-            // Read the PEM file containing the private key
-            FileReader fileReader = new FileReader(privateKeyFilePath);
-            PEMKeyPair pemKeyPair = (PEMKeyPair) new PEMParser(fileReader).readObject();
-            fileReader.close();
-
-            // Convert the PKCS#1 private key to PKCS#8 format
-            JcaPEMKeyConverter converter = new JcaPEMKeyConverter().setProvider("BC");
-            KeyPair keyPair = converter.getKeyPair(pemKeyPair);
-            PrivateKeyInfo privateKeyInfo = PrivateKeyInfo.getInstance(keyPair.getPrivate().getEncoded());
-            PrivateKey privateKey = converter.getPrivateKey(privateKeyInfo);
-
-            // Use the converted private key as needed
-            System.out.println("Private key: " + privateKey);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-    }
 
 
 

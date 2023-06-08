@@ -41,24 +41,25 @@ public class Main {
 
         //Cripto.getUserSertificate();
 
-        //homePage();
+        homePage();
 
-        Cripto.prikazFajlova("dejan");
+        //Cripto.prikazFajlova("dejan");
     }
 
-    private static void printEq() {
-        System.out.println("===================================");
-        System.out.println("===================================");
+    private static void printEq(String str) {
+        System.out.println("\n====================================");
+        System.out.printf("||%30s||\n",str);
+        System.out.println("====================================");
     }
 
     private static void homePage() {
-        printEq();
+        printEq("Dobrodosli!");
         int i = 0;
         char input;
         boolean whileCond = true;
         while (whileCond) {
 
-            System.out.println("Dobrodosli!\nPritisnite dugme [ r -registracija\b p -prijava ]");
+            System.out.println("\nPritisnite dugme [ r -registracija\b p -prijava ]");
             input = sc.nextLine().charAt(0);
             input = Character.toUpperCase(input);
             switch (input) {
@@ -66,7 +67,8 @@ public class Main {
                     ////////////Prijava na sistem
                     if (prijavaNaSistem()) {
 
-                        printEq();
+                        printEq("Prijavljen korisnik: " + username +"" +
+                                "\nIspis fajlova");
 
                         Cripto.prikazFajlova(username);
                         dodajFajl();
@@ -94,14 +96,12 @@ public class Main {
 
     private static boolean prijavaNaSistem() {
 
-        printEq();
+        printEq("Prijava");
         boolean certTrue = true;
 
 
         System.out.println("Unesite korisnicko ime: ");
         username = sc.nextLine();
-        ////////////////////////////////Provjera
-        //System.out.println("Provjera: ");
         Cripto.provjeriSertifikat(username + ".crt");
 
 
@@ -140,13 +140,12 @@ public class Main {
                 }
             }
         }
-
         return certTrue;
     }
 
     private static void registracijaNaSistem() {
         /////////// unos imena
-        printEq();
+        printEq("Registracija");
         File usersPath = new File(Utils.USERS_PATH);
         String[] usersList = usersPath.list();
         File newUser = null;
@@ -184,13 +183,22 @@ public class Main {
     }
 
     private static void preuzmiFajl(){
-        printEq();
+        printEq("Preuzimanje fajla");
         System.out.println("Da li zelite da preuzmete neki fajl [y/n]");
         String input = sc.nextLine();
 
         switch (input.toUpperCase().charAt(0)){
             case 'Y' :{
+
+                System.out.println("\nDostupni fajlovi");
                 Cripto.prikazFajlova(username);
+                System.out.println("Izaberite fajl koji preuzimate: ");
+                String fajl = sc.nextLine();
+                System.out.println("Unesite lokaciju na kojoj ce se smjestiti fajl (sa njegovim imenom)");
+                String putanjaNovog= sc.nextLine();
+
+                Cripto.preuzmiFajl(username,fajl,putanjaNovog);
+
 
             } case 'N':{
             }
@@ -199,7 +207,7 @@ public class Main {
     }
 
     private static void dodajFajl(){
-        printEq();
+        printEq("Dodavanje fajla");
         System.out.println("Da li zelite da dodate neki fajl [y/n]");
         String input = sc.nextLine();
 
