@@ -1,2 +1,2 @@
-dejan,token.txt,3
-dejan,x,3
+dejan,lol,3
+dejan,xoks,3

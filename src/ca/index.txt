@@ -1,2 +1,0 @@
-V	231205140317Z		01	unknown	/C=BA/ST=RS/O=Elektrotehnicki fakultet/OU=ETF/CN=dejan/emailAddress=dejan@mail.com
-V	231205140351Z		02	unknown	/C=BA/ST=RS/O=Elektrotehnicki fakultet/OU=ETF/CN=op/emailAddress=op@mail.com

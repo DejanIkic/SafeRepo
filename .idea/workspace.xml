@@ -4,12 +4,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eba73811-a155-4888-b854-b0b3e79a4c6c" name="Changes" comment="das">
+    <list default="true" id="eba73811-a155-4888-b854-b0b3e79a4c6c" name="Changes" comment="dasa3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/certs/dejan.crt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/certs/op.crt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/crl/crllist1.crl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/crlnumber" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/crlnumber" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/index.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/index.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/index.txt.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/index.txt.attr.old" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/index.txt.old" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/newcerts/01.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/newcerts/02.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/reqs/dejan.csr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/reqs/op.csr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/serial" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/serial" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/serial.old" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Cripto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Cripto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repo/01/dejan.token.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repo/01/dejan.x" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repo/02/dejan.token.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repo/02/dejan.x" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repo/03/dejan.token.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repo/03/dejan.x" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/repo/database.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/repo/database.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repo/temp" beforeDir="false" afterPath="$PROJECT_DIR$/src/repo/temp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repo/tempD" beforeDir="false" afterPath="$PROJECT_DIR$/src/repo/tempD" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repo/tempProvjera" beforeDir="false" afterPath="$PROJECT_DIR$/src/repo/tempProvjera" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/signedFiles/dejan.token.txt.signed" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/signedFiles/dejan.x.signed" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/dejan/password" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/dejan/privateKey.pem" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/dejan/public.key" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/op/password" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/op/privateKey.pem" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,18 +67,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/dejan/Desktop/mrs/SafeRepo/src/resources&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/dejan/Desktop/mrs/SafeRepo/src/resources",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/resources" />
@@ -141,7 +172,21 @@
       <option name="project" value="LOCAL" />
       <updated>1686235437357</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="das">
+      <created>1686240329068</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1686240329068</updated>
+    </task>
+    <task id="LOCAL-00003" summary="dasa3">
+      <created>1686240413782</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1686240413782</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,54 +202,56 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="das" />
-    <option name="LAST_COMMIT_MESSAGE" value="das" />
+    <MESSAGE value="dasa3" />
+    <option name="LAST_COMMIT_MESSAGE" value="dasa3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/Main.java</url>
-          <line>26</line>
-          <properties class="main.Main" method="main">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
-          <line>216</line>
+          <line>233</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
-          <line>170</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
-          <line>171</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
-          <line>134</line>
+          <line>144</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
-          <line>168</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
-          <line>79</line>
+          <line>86</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
-          <line>195</line>
+          <line>212</line>
           <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/Main.java</url>
+          <line>275</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
+          <line>181</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
+          <line>112</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
+          <line>317</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/Cripto.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.RuntimeException" package="java.lang" />

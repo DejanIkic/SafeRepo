@@ -26,7 +26,9 @@ import java.nio.file.StandardCopyOption;
 import java.security.*;
 import java.security.cert.*;
 import java.security.cert.Certificate;
+import java.sql.PreparedStatement;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Cripto {
 
@@ -42,14 +44,19 @@ public class Cripto {
 
         String skripta = "." + FS + "scripts" + FS + "generisiSertifikat.sh";
         String[] komanda = {"bash", skripta, username};
-        System.out.println(pokreniSkriptu(komanda));
+        pokreniSkriptu(komanda);
+        regenerisiCRLListu();
 
     }
 
-    public static void provjeriSertifikat(String username) {
+    public static int provjeriSertifikat(String cert) {
+        if ( !new File(System.getProperty("user.dir") +FS + "src" + FS +"ca"+FS+"certs"+FS+cert ).exists()   ){
+            System.out.println("Fajl ne postoji");
+            return -2;
+        }
         String skripta = "." + FS + "scripts" + FS + "provjeriSertifikat.sh";
-        String[] komanda = {"bash", skripta, username};
-        System.out.println(pokreniSkriptu(komanda));
+        String[] komanda = {"bash", skripta, cert};
+        return pokreniSkriptu(komanda);
     }
 
     public static boolean provjeraLozinke(String username, String plainPass) {
@@ -86,12 +93,12 @@ public class Cripto {
             for (String s : content) {
                 String[] arr = s.split(",");
 
-                if (arr[0].equals(username)){
+                if (arr[0].equals(username)) {
 
                     File tempProvjera = sastaviSegmente(username, arr[1], arr[2]);
 
                     int result = verifikujPoptis(username, arr[1], tempProvjera.getAbsolutePath());
-                    System.out.println( (result==0 )?( ""+ arr[1] ):("[CORRUPTED] " + arr[1] ));
+                    System.out.println((result == 0) ? ("" + arr[1]) : ("[CORRUPTED] " + arr[1]));
                 }
             }
 
@@ -100,18 +107,23 @@ public class Cripto {
         }
     }
 
-    private static File sastaviSegmente(String username, String fileName, String brSegmenata ) throws IOException{
+    private static File sastaviSegmente(String username, String fileName, String brSegmenata) throws IOException {
         String resultDec = "";
+
+        String fajlSimetricnogKljuca=Utils.USERS_PATH +FS + username + FS +"simetricniKljuc";
+        FileReader fr = new FileReader(fajlSimetricnogKljuca);
+        BufferedReader br = new BufferedReader(fr);
+        String simetricniKljuc = br.readLine();
+
         for (int i = 0; i < Integer.valueOf(brSegmenata); i++) {
             File tempD = new File(Utils.REPO_PATH + FS + "tempD");
             String brSegmenta = String.format("%02d", i + 1);
-
-            dekriptujFajl(username, brSegmenta, AES_SIFRA, fileName);
+            dekriptujFajl(username, brSegmenta, simetricniKljuc, fileName);
             resultDec += Files.readString(tempD.toPath());
         }
 
         // provjeri potpis fajla
-        File tempProvjera = new File(Utils.REPO_PATH +FS + "tempProvjera");
+        File tempProvjera = new File(Utils.REPO_PATH + FS + "tempProvjera");
         FileWriter fw = new FileWriter(tempProvjera);
         BufferedWriter bw = new BufferedWriter(fw);
 
@@ -120,7 +132,7 @@ public class Cripto {
         return tempProvjera;
     }
 
-    private static int verifikujPoptis(String username, String imeFajla, String fajl){
+    private static int verifikujPoptis(String username, String imeFajla, String fajl) {
 
         String skripta = "." + FS + "scripts" + FS + "verifikujPoptis.sh";
         String[] komanda = {"bash", skripta, username, imeFajla, fajl};
@@ -128,12 +140,10 @@ public class Cripto {
     }
 
 
-
-
     public static void dodajFajl(String username, File file) {
 
         int brojSegmenata = Main.random.nextInt(4, 11);
-        brojSegmenata=3;
+
         if (!file.exists()) {
             System.out.println("Fajl ne postoji!");
             return;
@@ -168,6 +178,12 @@ public class Cripto {
 
                 List<String> segmenti = podijeliString(sadrzajFajla, brojSegmenata);
 
+
+                String fajlSimetricnogKljuca=Utils.USERS_PATH +FS + username + FS +"simetricniKljuc";
+                FileReader fr = new FileReader(fajlSimetricnogKljuca);
+                BufferedReader br = new BufferedReader(fr);
+                String simetricniKljuc = br.readLine();
+
                 for (int i = 0; i < brojSegmenata; i++) {
                     String brSegmenta = String.format("%02d", i + 1);
 
@@ -176,7 +192,9 @@ public class Cripto {
                     fw.write(segmenti.get(i));
                     fw.flush();
 
-                    enkriptujFajl(username, brSegmenta, AES_SIFRA, file.getName());
+
+
+                    enkriptujFajl(username, brSegmenta, simetricniKljuc, file.getName());
                 }
 
                 fw.close();
@@ -189,16 +207,15 @@ public class Cripto {
     }
 
 
-
-    public static void preuzmiFajl(String username, String fileName, String newPath){
+    public static void preuzmiFajl(String username, String fileName, String newPath) {
         File file = new File(Utils.DATABASE_PATH);
         try {
             List<String> content = Files.readAllLines(file.toPath());
             File source = null;
-            for (String s : content){
+            for (String s : content) {
                 String[] arr = s.split(",");
                 if (arr[0].equals(username) && arr[1].equals(fileName)) {
-                    source = sastaviSegmente(username,arr[1], arr[2]);
+                    source = sastaviSegmente(username, arr[1], arr[2]);
                 }
             }
 
@@ -216,9 +233,7 @@ public class Cripto {
 
         String skripta = "." + FS + "scripts" + FS + "potpisiFajl.sh";
         String[] komanda = {"bash", skripta, username, imeFajla, putanjaFajla};
-        System.out.println(pokreniSkriptu(komanda));
-
-        return 1;
+        return pokreniSkriptu(komanda);
     }
 
     private static int enkriptujFajl(String username, String brojSegmenta, String sifraAES, String imeFajla) {
@@ -273,12 +288,13 @@ public class Cripto {
         return result;
     }
 
-    ///// digitalni potpis fajla ( enkripcija hesa )
 
     ///// generisanje para kljuceva
     public static KeyPair generisiKljuceve(File putanjaKorisnika) {
         Security.addProvider(new BouncyCastleProvider());
         try {
+
+            //par kljuceva za asimetricne algoritme
             KeyPairGenerator keygen = KeyPairGenerator.getInstance(KEY_ALG, BC_PROVIDER);
             keygen.initialize(2048);
             KeyPair keyPair = keygen.generateKeyPair();
@@ -294,8 +310,20 @@ public class Cripto {
 
             FileWriter fw = new FileWriter(putanjaKorisnika + File.separator + "privateKey.pem");
             fw.write(keyInPemFormat);
-            fw.close();
+            fw.flush();
 
+
+            //kljuc za simetricne algoritme
+
+            byte[] randomBytes = new byte[32];
+            SecureRandom secureRandom = new SecureRandom();
+            secureRandom.nextBytes(randomBytes);
+            String simetrictniKljuc = Base64.getEncoder().encodeToString(randomBytes);
+
+            File simetricniKljucFajl = new File(putanjaKorisnika +FS + "simetricniKljuc");
+            fw = new FileWriter(simetricniKljucFajl);
+            fw.write(simetrictniKljuc);
+            fw.close();
             return keyPair;
 
         } catch (NoSuchAlgorithmException | NoSuchProviderException e) {
@@ -321,6 +349,65 @@ public class Cripto {
             e.printStackTrace();
         }
         return 1;
+    }
+
+
+
+    public static void obnoviSertifikat(String imeSertifikata) {
+
+        File fajlSert = new File(System.getProperty("user.dir") + FS + "src" + FS +
+                "ca" + FS + "certs" + FS + imeSertifikata);
+        String serijskiBroj = "";
+        try {
+            //trazi serijski broj
+            String sadrzajSertifikata = Files.readString(fajlSert.toPath());
+            serijskiBroj = sadrzajSertifikata.lines().filter(s -> s.contains("Serial Number:")).findFirst().get();
+            serijskiBroj = serijskiBroj.split("x")[1].replace(")", "");
+
+            File indexFile = new File(System.getProperty("user.dir") + FS + "src" + FS +
+                    "ca" + FS + "index.txt");
+            List<String> zapisi = Files.readAllLines(indexFile.toPath());
+            String noviIndex = "";
+
+            for (String zapis : zapisi) {
+                String[] zapisNiz = zapis.split("\\s+");
+                boolean res;
+                try {
+                    res = Integer.parseInt(serijskiBroj, 16) == Integer.parseInt(zapisNiz[3], 16);
+                } catch (NumberFormatException e) {
+                    noviIndex += zapis + "\n";
+                    continue;
+                }
+                if (zapisNiz[0].equals("R") && res) {
+                    zapis = zapis.replaceFirst("R", "V");
+                    zapis = zapis.replaceFirst("\\d+\\w,certificateHold", "");
+                }
+                noviIndex += zapis + "\n";
+            }
+
+            FileWriter fw = new FileWriter(indexFile);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(noviIndex);
+            bw.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        regenerisiCRLListu();
+    }
+
+    public static void suspendujSertifikat(String imeSert) {
+        String skripta = "." + FS + "scripts" + FS + "suspendujSertifikat.sh";
+        String[] komanda = {"bash", skripta, imeSert, AES_SIFRA};
+        pokreniSkriptu(komanda);
+        regenerisiCRLListu();
+    }
+
+    public static void regenerisiCRLListu() {
+        String skripta = "." + FS + "scripts" + FS + "regenerisiCRLListu.sh";
+        String[] komanda = {"bash", skripta, AES_SIFRA};
+        pokreniSkriptu(komanda);
     }
 }
 
