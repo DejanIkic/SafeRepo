@@ -1,28 +1,19 @@
------BEGIN PRIVATE KEY-----
-MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDfyBMf4dzFV8cT
-qna1mglnUkPfn/tjuuBtaalEt/SChXWl338uH4rqSH3SUUeAjxQqyjH0Xijg4I+e
-nD9/vX5aUotpG/twu6oHyaf5Any9ADZ3dGgkhwJC2ZJesMXt9LIvNpI1Ls0PzcYd
-F31UlndBmfO2Bs1BD6xB2wyM1Tg2HODP/xjt+PqdBR/P+JuCxoGg/Jz45ca+Ztaj
-qmhvNpPCIClYvGvHVDr6McvmtcJNTezEwVsoaIX39oHw9dRFYIc2GaU20vx7OSSV
-XeWuU37Mq0+GoIhtJY0egJ45DXydbJxMqgmMJVhKHOWnm1BMrEYXAetwTgLkH+cK
-Kje+2QrZAgMBAAECggEABUNUr9Cau0lv39aH1DLl5bgu6yN9a2sJvDOv93McHQsR
-KUWIXYgAYbeIE1o2BEqufr3NTvdSnsypPrcOB0MS+wIrT92InFjNjEFXN1QHpapL
-naOZ5MIIG5UNDDe8GqHr+ZBJqqvfHBq1fhmp/kNLqrn5hrPCQArOUlOEiAtmYbS2
-PFyDqksYfQFqwg1NpLMwmfhgdrV1X/olVefjQ8TmA7VtFzg20VZVMmbgPAIZGaF0
-+0fS/zsMSvZlfR4Kswr08nhME3pZzObcJjYoXnrg3auvSIoH3z8WKTyv759EGzB1
-JrfA5rHr8RJhHa5KabSVSjdHJF5VqLUq+TNZk+3bwQKBgQD1srzigFGgonyscG/s
-QR81pPGbNCLt2WwjGKCVkG5nuHBfUMKEh+osOZ3wkWOkHSI1Es7F2uLsOtkS+3BI
-uVP/33OKIfltpZ+BTLLfwCe6UfSuJwzYj0IQCamP+Ts5O33u2FLa6il87e17dV/E
-UdfCPCBKwGVsNBWVyx5HtvjwRwKBgQDpKhbNqFK8uuGDoKGJuDbNyPI+J9/X/dyW
-TX4dHTRjTOFDDxFCq/TuTE1wjoLgAT2qEF/TBhiA0tBK8WRbiHO6QdjWsJJCVe7x
-uMh9oXOgg0I1fQiLx3ktv1Q0EQF6Voto8N5U+vtrQB44lKgLGDqM6Z/aGi6sjJTH
-VJWpunXb3wKBgQDURLODTDE5gqgLoqhPiIOaKQLDf+udafZO6/vwu3NnEKWk83Ta
-Y0IhKzYUnMdlBfaDu9gAf/cE+GKKT8jWS6cSrM55TJjd7fU8FDOFs9Ge2yd1Pi+O
-+VWt3WstA7ny3D8UlrgegaeOU1CVFPbD+aFaIfAUJNx6+xSa8X0boCy6CQKBgGCn
-SOKhtwJzOY6V5MCxM06k0P5BC0J/ApTvtKqe85uCQBLLSS1pGNQ7nxJckRYIjaZU
-uVRBv6CPQzb9z8s9yjNYnmmIsmh7NNzQ65NgfQz5vFVt6j//RVVYbbBTqFgtTgcH
-ajKyA8zWvHBZ9zr6JTNKmTAREG4IrJfgkVXVbIvjAoGBAL/EyYRqZ4NTlC6QpkuR
-DBdxaYZxi3cGr9W+XGlJSktUC64UumH3kMelQLvqwXwxKjlR10Vewv0QUAL6OloX
-GaGqNowbNUoHtTKxCWRYtXiAneo9aANQIhbgUvRuN0vBnDhlfi2uKgUIVyn+3IDA
-oLKu7u/ka6GIXfWin/mpH2UR
------END PRIVATE KEY-----
+#!/bin/bash
+keys=`ls ./ | grep "kljuc"`
+
+# dekodujemo sifrat iz base64 u binarni oblik
+openssl enc -base64 -d -in sifrat.txt -out sifrat.dec
+
+for key in $keys
+do
+	# prebacimo kljuc iz DER u PEM format
+	openssl rsa -in $key -out $key.pem -inform DER -outform PEM 2>error1.txt
+	# dekriptujemo pomocu RSA privatnog kljuca
+	rezultat=`openssl rsautl -decrypt -in sifrat.dec -inkey $key.pem 2>error2.txt`
+	if [ "$rezultat" != "" ]
+		then
+			echo -e "KLJUC: $key"
+			echo -e "ULAZ: $rezultat"
+			break
+	fi
+done

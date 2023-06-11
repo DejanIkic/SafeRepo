@@ -27,6 +27,7 @@ import java.security.*;
 import java.security.cert.*;
 import java.security.cert.Certificate;
 import java.sql.PreparedStatement;
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -50,7 +51,9 @@ public class Cripto {
     }
 
     public static int provjeriSertifikat(String cert) {
-        if ( !new File(System.getProperty("user.dir") +FS + "src" + FS +"ca"+FS+"certs"+FS+cert ).exists()   ){
+
+        if ( !new File(System.getProperty("user.dir") +FS + "src" + FS +"ca"+FS+"certs"+FS+cert ).exists() ||
+        cert.length()==0){
             System.out.println("Fajl ne postoji");
             return -2;
         }
@@ -79,32 +82,34 @@ public class Cripto {
         return false;
     }
 
-    public static void prikazFajlova(String username) {
+    public static int prikazFajlova(String username) {
         /// za svaki fajl od ovog korisnika
         /// provjeriti potpis fajla i vrijednost u bazi
         /// izmijenjeni fajl
         try {
             File filesContentFile = new File(Utils.DATABASE_PATH);
-            List<String> content = null;
+            List<String> content = Files.readAllLines(filesContentFile.toPath());
 
-            content = Files.readAllLines(filesContentFile.toPath());
 
+
+            boolean imaFajlova=false;
 
             for (String s : content) {
                 String[] arr = s.split(",");
 
                 if (arr[0].equals(username)) {
-
+                    imaFajlova=true;
                     File tempProvjera = sastaviSegmente(username, arr[1], arr[2]);
 
                     int result = verifikujPoptis(username, arr[1], tempProvjera.getAbsolutePath());
                     System.out.println((result == 0) ? ("" + arr[1]) : ("[CORRUPTED] " + arr[1]));
                 }
             }
-
+            return imaFajlova?0:-1;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     private static File sastaviSegmente(String username, String fileName, String brSegmenata) throws IOException {

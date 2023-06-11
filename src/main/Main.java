@@ -55,14 +55,17 @@ public class Main {
 
     private static void homePage() {
 
-        char input;
+        String input;
         while (true) {
 
             printEq("Glavni Meni");
-            System.out.println("Pritisnite dugme [ r -registracija\t p -prijava \t i -izlazak]");
-            input = sc.nextLine().charAt(0);
-            input = Character.toUpperCase(input);
-            switch (input) {
+            System.out.println("[ R -registracija\t P -prijava \t I -izlazak]");
+            input = sc.nextLine();
+            if (input.length()==0) {
+                input=" "; // u slucaju pritiskanja <Enter> ulazi u default case
+            }
+
+            switch (input.toUpperCase().charAt(0)) {
                 case 'P': {
                     ////////////Prijava na sistem
                     if (prijavaNaSistem()) {
@@ -71,9 +74,12 @@ public class Main {
                         String izbor = "";
                         while (!izbor.equalsIgnoreCase("o")) {
                             printEq("Prijavljen korisnik: " + username);
-                            System.out.println("D- dodaj\t P -preuzmi \t O -odjava\t V - prikaz fajlova");
+                            System.out.println("[D- dodaj\t P -preuzmi \t O -odjava\t V - prikaz fajlova]");
                             izbor = sc.nextLine();
 
+                            if (izbor.length()==0) {
+                                izbor=" "; // u slucaju pritiskanja <Enter> ulazi u default case
+                            }
                             switch (izbor.toUpperCase().charAt(0)) {
                                 case 'D': {
                                     Cripto.prikazFajlova(username);
@@ -230,8 +236,13 @@ public class Main {
     private static void preuzmiFajl() {
         printEq("Preuzimanje fajla");
 
+
+        int res= Cripto.prikazFajlova(username);
+        if (res == -1){
+            System.out.println("Nema dostupnih fajlova!");
+            return;
+        }
         System.out.println("\nDostupni fajlovi");
-        Cripto.prikazFajlova(username);
         System.out.println("Izaberite fajl koji preuzimate: ");
         String fajl = sc.nextLine();
         System.out.println("Unesite lokaciju na kojoj ce se smjestiti fajl (sa njegovim imenom)");

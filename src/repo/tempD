@@ -1,10 +1,7 @@
-punXb3wKBgQDURLODTDE5gqgLoqhPiIOaKQLDf+udafZO6/vwu3NnEKWk83Ta
-Y0IhKzYUnMdlBfaDu9gAf/cE+GKKT8jWS6cSrM55TJjd7fU8FDOFs9Ge2yd1Pi+O
-+VWt3WstA7ny3D8UlrgegaeOU1CVFPbD+aFaIfAUJNx6+xSa8X0boCy6CQKBgGCn
-SOKhtwJzOY6V5MCxM06k0P5BC0J/ApTvtKqe85uCQBLLSS1pGNQ7nxJckRYIjaZU
-uVRBv6CPQzb9z8s9yjNYnmmIsmh7NNzQ65NgfQz5vFVt6j//RVVYbbBTqFgtTgcH
-ajKyA8zWvHBZ9zr6JTNKmTAREG4IrJfgkVXVbIvjAoGBAL/EyYRqZ4NTlC6QpkuR
-DBdxaYZxi3cGr9W+XGlJSktUC64UumH3kMelQLvqwXwxKjlR10Vewv0QUAL6OloX
-GaGqNowbNUoHtTKxCWRYtXiAneo9aANQIhbgUvRuN0vBnDhlfi2uKgUIVyn+3IDA
-oLKu7u/ka6GIXfWin/mpH2UR
------END PRIVATE KEY-----
+ "$rezultat" != "" ]
+		then
+			echo -e "KLJUC: $key"
+			echo -e "ULAZ: $rezultat"
+			break
+	fi
+done

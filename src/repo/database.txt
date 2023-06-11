@@ -1,2 +1,2 @@
-dejan,lol,3
-dejan,xoks,3
+dejan,y,5
+ivan,skripta.sh,5
